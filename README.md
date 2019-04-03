@@ -1,2 +1,2 @@
 # brief
-Briefly, but a PWA
+Briefly, but a PWA :tada:
