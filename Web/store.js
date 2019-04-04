@@ -1,3 +1,7 @@
+if(window.localStorage.getItem("links") == null){
+    window.localStorage.setItem("links",JSON.stringify(new Array()));
+}
+
 // FUNCTION ==============================================================
 const createLnkElem = (lnkAdr) => {
     const lnkElem = document.createElement("li");
@@ -31,7 +35,8 @@ const remLnk = (lnkElem) => {
 // ========================================================================
 
 
-const links = JSON.parse(window.localStorage.getItem("links"));
+const links = (JSON.parse(window.localStorage.getItem("links")));
+console.log(typeof(links),links);
 const sideBarMen = document.getElementsByClassName("sidebarMenuInner")[0];
 const addElem = document.getElementsByClassName("addSub")[0];
 const subLnk = document.getElementsByClassName("subLnk")[0];
@@ -45,4 +50,19 @@ addElem.addEventListener("click", (e) => {
         window.localStorage.setItem("links", JSON.stringify(links));
     }
     subLnk.value = "";
+});
+
+// register service worker
+
+window.addEventListener('load', async e => {
+    console.log(navigator.onLine);
+    if ('serviceWorker' in navigator) {
+        try {
+            navigator.serviceWorker.register('serviceworker.js');
+            console.log('SW registered');
+        } catch (error) {
+            console.log('SW failed');
+
+        }
+    }
 });

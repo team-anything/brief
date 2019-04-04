@@ -261,7 +261,7 @@ body {
  height: 100%; /* set 100% */
  will-change: transform, opacity;
  top: 0;
- border-radius: 10px;
+ /* border-radius: 10px; */
  min-width: 265px;
 }
 
