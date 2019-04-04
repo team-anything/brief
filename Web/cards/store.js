@@ -1,21 +1,48 @@
-if (window.localStorage.getItem("count") == null) {
-    window.localStorage.setItem("count", JSON.stringify(0));
-    var linkCount = 0;
-} else {
-    var linkCount = JSON.parse(window.localStorage.getItem("count"));
-    const links = [];
-    for (let i = 0; i < linkCount; i++) {
-        links.push(JSON.parse(window.localStorage.getItem(JSON.stringify(i))));
-    }
+// FUNCTION ==============================================================
+const createLnkElem = (lnkAdr) => {
+    const lnkElem = document.createElement("li");
+    const remElem = document.createElement("div")
+
+    lnkElem.classList.add("link");
+    remElem.classList.add("remSub");
+    lnkElem.id = "link"+lnkAdr;
+    remElem.id = lnkAdr;
+
+    lnkElem.textContent = lnkAdr;
+    remElem.textContent = " x ";
+
+    lnkElem.appendChild(remElem);
+    sideBarMen.appendChild(lnkElem);
+
+    remElem.addEventListener("click", (e) => {
+        remLnk(lnkElem);
+    })
 }
 
-const addSub = document.getElementsByClassName("addSub")[0];
+const remLnk = (lnkElem) => {
+    const links = JSON.parse(window.localStorage.getItem("links"));
+    const lnkAdr = lnkElem.firstChild.textContent;
+    const newLnk = links.filter(e => e !== lnkAdr);
+
+    lnkElem.remove();
+    window.localStorage.setItem("links", JSON.stringify(newLnk));
+}
+
+// ========================================================================
+
+
+const links = JSON.parse(window.localStorage.getItem("links"));
+const sideBarMen = document.getElementsByClassName("sidebarMenuInner")[0];
+const addElem = document.getElementsByClassName("addSub")[0];
 const subLnk = document.getElementsByClassName("subLnk")[0];
+links.forEach((e) => {createLnkElem(e)});
 
-addSub.addEventListener("click", (e) => {
-    const link = subLnk.value;
-    window.localStorage.setItem(JSON.stringify(linkCount), JSON.stringify(link));
-    linkCount += 1;
-    window.localStorage.setItem("count", JSON.stringify(linkCount));
+addElem.addEventListener("click", (e) => {
+    const links = JSON.parse(window.localStorage.getItem("links"));
+    if(links.indexOf(subLnk.value) == -1){
+        links.push(subLnk.value);
+        createLnkElem(subLnk.value);
+        window.localStorage.setItem("links", JSON.stringify(links));
+    }
     subLnk.value = "";
-}
+});
