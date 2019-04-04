@@ -28,22 +28,25 @@ def get_source(url, max_get_articles=20):
 
     articles = []
     for article in news_articles.articles[:min(max_get_articles, n_articles)]:
-        article.download()
-        article.parse()
-
-        title = article.title
+        # TODO: FIX NEEDED form CrashLoopBackOff
         try:
-            image = article.top_image
+            article.download()
+            article.parse()
+
+            title = article.title
+            try:
+                image = article.top_image
+            except:
+                image = "https://github.com/team-anything/Briefly/blob/master/assets/Briefly.png"
+
+            article.nlp()
+            summary = summarizer(article)
+
+            # TODO: humanize in Client-Side
+            date = datetime.today().strftime("%b %d %Y")
+            articles.append([article.url, title, date, image, summary])
         except:
-            image = "https://github.com/team-anything/Briefly/blob/master/assets/Briefly.png"
-
-        article.nlp()
-        summary = summarizer(article)
-
-        # TODO: humanize in Client-Side
-        date = datetime.today().strftime("%b %d %Y")
-        print([article.url, title, date, image, summary])
-        articles.append([article.url, title, date, image, summary])
+            print("BOOYEAH!")
 
     return articles
 
