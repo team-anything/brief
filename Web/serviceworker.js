@@ -1,7 +1,8 @@
 const staticAssets = [
     './',
-    './style.css',
-    './app.js'
+    './main.css',
+    './main.js',
+    './store.js'
 ];
 
 var mode;
