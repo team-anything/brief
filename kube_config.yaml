@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: anything-brief
+spec:
+  replicas: 1
+  minReadySeconds: 5
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: anything-brief
+    spec:
+      containers:
+        - image: inishchith/brief:latest
+          imagePullPolicy: Always
+          name: anything-brief
+          ports:
+            - containerPort: 8000
