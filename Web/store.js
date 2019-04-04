@@ -34,6 +34,7 @@ const remLnk = (lnkElem) => {
 
     lnkElem.remove();
     window.localStorage.setItem("links", JSON.stringify(newLnk));
+    location.reload();
 }
 
 // ========================================================================
@@ -54,6 +55,7 @@ addElem.addEventListener("click", (e) => {
         window.localStorage.setItem("links", JSON.stringify(links));
     }
     subLnk.value = "";
+    location.reload();
 });
 
 // register service worker
