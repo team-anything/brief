@@ -24,7 +24,6 @@ self.addEventListener('fetch', event => {
             event.respondWith(networkFirst(request));
         }
     }
-
 });
 
 self.addEventListener('message', function(event){
