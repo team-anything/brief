@@ -2,6 +2,7 @@
 
 /* import font ROBOTO */
 @import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700');
+@import url('https://fonts.googleapis.com/css?family=Pacifico');
 
 * {
   box-sizing: border-box;
@@ -93,7 +94,6 @@ h3 {
 .card-content {
  position: relative;
  color: #fff;
- padding: 5px;
 }
 
 .card-image img{
@@ -120,6 +120,7 @@ h3 {
  -ms-flex-align: center;
  align-items: center;
  padding: 25px 35px;
+ border-top: 1px solid #000;
 }
 
 .popular-destinations-text {
@@ -353,9 +354,14 @@ body {
   margin: 1em;
 }
 
-.card-head{
+.card-text-head{
   font-size: 2em;
   margin: 1em;
+  text-align: center;
+}
+
+.card-text-content{
+  text-align: justify;
 }
 
 #stacked-cards-block{
@@ -370,10 +376,10 @@ body {
   height: 100%;
   position: fixed;
   left: 0;
-  width: 250px;
-  transform: translateX(-250px);
+  width: 200px;
+  transform: translateX(-200px);
   transition: transform 250ms ease-in-out;
-  background: rgba(0,0,0,0.3);
+  background: rgba(0,0,0,0.8);
 }
 .sidebarMenuInner{
   margin:0;
@@ -383,9 +389,8 @@ body {
 .sidebarMenuInner li{
   list-style: none;
   color: #fff;
-  text-transform: uppercase;
   font-weight: bold;
-  padding: 20px;
+  padding: 10px;
   cursor: pointer;
   border-bottom: 1px solid rgba(255, 255, 255, 0.10);
 }
@@ -396,7 +401,6 @@ body {
 }
 .sidebarMenuInner li a{
   color: #fff;
-  text-transform: uppercase;
   font-weight: bold;
   cursor: pointer;
   text-decoration: none;
@@ -405,7 +409,7 @@ input[type="checkbox"]:checked ~ #sidebarMenu {
   transform: translateX(0);
 }
 input[type="checkbox"]:checked ~ .sidebarIconToggle {
-  transform: translateX(250px);
+  transform: translateX(200px);
 }
 input[type=checkbox] {
   transition: all 0.3s;
@@ -476,6 +480,42 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
 }
 .addSub{
   cursor: pointer;
-  background-color: red;
   display: inline-block;
+  background: #aaa;
+  color: #000;
+  font-size: 1.2em;
+  padding: .5em;
+  border-radius: 1.2em;
+}
+
+.subLnk {
+  border-radius: 1.2em;
+}
+/* ======================= */
+.link {
+  display: flex;
+  font-size: 1.2em;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+}
+
+.remSub {
+  font-size: 2em;
+  color: red;
+}
+
+form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+
+.sidebarHead {
+  font-size: 2em;
+  text-align: center;
+  font-family: 'Pacifico', cursive;
+  font-weight: 100;
 }
