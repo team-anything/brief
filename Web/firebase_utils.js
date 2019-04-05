@@ -1,5 +1,18 @@
 var stackedCard = document.getElementsByClassName("stackedcards-container")[0];
 
+const advCard = () => {
+    const advCardCon = document.createElement("div");
+    const advCard = document.createElement("div");
+    
+    advCardCon.classList.add("advCard-container");
+    advCard.classList.add("advCard");
+
+    advCard.textContent = "Full page ads go here";
+    advCardCon.appendChild(advCard);
+
+    stackedCard.appendChild(advCardCon);
+}
+
 const createCard = (content,src) => {
     const card = document.createElement("div");
     const cardContent = document.createElement("div");
@@ -339,9 +352,12 @@ var get_result = async function () {
         const src = res[1];
         res = res[0];
         res = res.splice(1);
-        res.forEach((fin) => {
+        res.forEach((fin,index) => {
             // console.log(fin);
             createCard(fin,src);
+            if(index%7 == 6){
+                advCard();
+            }
         })
     })
     var stackedCard = document.getElementsByClassName("stackedcards-container")[0];

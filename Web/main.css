@@ -546,3 +546,16 @@ form{
   font-family: 'Pacifico', cursive;
   font-weight: 100;
 }
+
+.advCard-container{
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.advCard{
+  font-size: 2em;
+  text-align: center;
+}
