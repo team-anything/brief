@@ -32,9 +32,13 @@ usnews,http://www.usnews.com
 usatoday,http://usatoday.com
 cbn,http://cbn.com
 bbcamerica,http://www.bbcamerica.com
-aajtak,https://aajtak.intoday.in/
 hindustan-times,https://www.hindustantimes.com
-bhaskar,https://www.bhaskar.com/
+bhaskar,https://www.bhaskar.com/national/
 hackernews,https://news.ycombinator.com/
-ndtv,https://khabar.ndtv.com/
 toi,https://timesofindia.indiatimes.com/
+ndtv,https://khabar.ndtv.com/
+navbharat,https://navbharattimes.indiatimes.com/
+bbc-india,https://www.bbc.com/hindi
+aajtak,https://aajtak.intoday.in/
+jagran,https://www.jagran.com/news/national-news-hindi.html
+indiatv,https://hindi.indiatvnews.com/

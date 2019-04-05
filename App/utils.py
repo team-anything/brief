@@ -14,7 +14,8 @@ import math
 from langdetect import detect
 
 IDEAL = 20.0
-MAX_SENT = 4
+MAX_SENT = 3
+WORD_LIMIT = 60
 stopwords = set()
 
 INDIAN_LANGUAGES = ['hi', 'guj', 'ma']
@@ -30,15 +31,23 @@ def summarizer(article):
 
 
 def summary(text, title, lang):
-    summar = []
+    summar = ""
     if lang not in INDIAN_LANGUAGES:
         return PLACEHOLDER
 
     if title == None:
         title = ""
     load_stopwords()
+    total_words = 0
     for bullets in summarize(text=text, title=title, lang=lang):
-        summar.append(bullets)
+        words = bullets.split()
+        if total_words + len(words) > WORD_LIMIT:
+            extras = WORD_LIMIT - total_words
+            summar += " ".join(words[:extras]) + " "
+            break
+        else:
+            summar += bullets + " "
+            total_words += len(words)
     if len(summar) == 0:
         summar = title
     return summar
@@ -46,7 +55,7 @@ def summary(text, title, lang):
 
 def load_stopwords():
     global stopwords
-    lines = open("./stopwords-hi.txt", "r")
+    lines = open("./data/stopwords-hi.txt", "r")
     stopwords = [word[:-1] for word in lines.readlines()]
 
 
@@ -144,26 +153,20 @@ def keywords(text):
     else:
         return dict()
 
-indian_punctuation_pattern = re.compile(
-    '([' + string.punctuation + '\u0964\u0965' + '])')
+indian_punctuation_pattern = re.compile('(['+string.punctuation+'\u0964\u0965'+'])')
 
 
 def indian_word(untokenized_string: str):
-    # The replace , deletes the ' | ' from the punctuation string provided by
-    # the library
-    modified_punctuations = string.punctuation.replace("|", "")
-    indian_punctuation_pattern = re.compile(
-        '([' + modified_punctuations + '\u0964\u0965' + ']|\|+)')
-    tok_str = indian_punctuation_pattern.sub(
-        r' \1 ', untokenized_string.replace('\t', ' '))
-    return re.sub(r'[ ]+', u' ', tok_str).strip(' ').split(' ')
+    modified_punctuations = string.punctuation.replace("|","") # The replace , deletes the ' | ' from the punctuation string provided by the library
+    indian_punctuation_pattern = re.compile('(['+modified_punctuations+'\u0964\u0965'+']|\|+)')
+    tok_str = indian_punctuation_pattern.sub(r' \1 ',untokenized_string.replace('\t',' '))
+    return re.sub(r'[ ]+',u' ',tok_str).strip(' ').split(' ')
 
-
-def indian_sent(untokenized_string: str):
-    tok_str = indian_punctuation_pattern.sub(
-        r' \1 ', untokenized_string.replace('\t', ' '))
-    x = re.sub(r'[ ]+', u' ', tok_str).strip('|').split(".")
+def indian_sent(untokenized_string:str):
+    tok_str = indian_punctuation_pattern.sub(r' \1 ',untokenized_string.replace('\t',' '))
+    x = re.sub(r'[ ]+',u' ',tok_str).strip('|').split(".")
     return x
+
 
 
 def length_score(sentence_len):
