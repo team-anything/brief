@@ -396,8 +396,8 @@ body {
   height: 100%;
   position: fixed;
   left: 0;
-  width: 200px;
-  transform: translateX(-200px);
+  width: 66vw;
+  transform: translateX(-66vw);
   transition: transform 250ms ease-in-out;
   background: rgba(0,0,0,0.8);
 }
@@ -429,7 +429,7 @@ input[type="checkbox"]:checked ~ #sidebarMenu {
   transform: translateX(0);
 }
 input[type="checkbox"]:checked ~ .sidebarIconToggle {
-  transform: translateX(200px);
+  transform: translateX(66vw);
 }
 input[type=checkbox] {
   transition: all 0.3s;
@@ -522,7 +522,7 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
 .link {
   display: flex;
   font-size: 1.2em;
-  justify-content: space-between;
+  justify-content: space-around;
   flex-direction: row;
   align-items: center;
 }
