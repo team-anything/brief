@@ -344,6 +344,12 @@ var get_result = async function () {
             createCard(fin,src);
         })
     })
+    var stackedCard = document.getElementsByClassName("stackedcards-container")[0];
+
+    for (var i = stackedCard.children.length; i >= 0; i--) {
+        stackedCard.appendChild(stackedCard.children[Math.random() * i | 0]);
+    }
+
     stackedCards();
 };
 
