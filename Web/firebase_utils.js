@@ -1,6 +1,6 @@
-const stackedCard = document.getElementsByClassName("stackedcards-container")[0];
+var stackedCard = document.getElementsByClassName("stackedcards-container")[0];
 
-const createCard = (content) => {
+const createCard = (content,src) => {
     const card = document.createElement("div");
     const cardContent = document.createElement("div");
     const cardImage = document.createElement("div");
@@ -15,6 +15,8 @@ const createCard = (content) => {
     const popularDestinationsImage = document.createElement("div");
     const circle = document.createElement("div");
     const advImg = new Image();
+    const wrapDiv = document.createElement("div");
+    const newsLink = document.createElement("a");
 
     card.classList.add("card");
     cardContent.classList.add("card-content");
@@ -29,9 +31,11 @@ const createCard = (content) => {
     popularDestinationsImage.classList.add("popular-destinations-image");
     circle.classList.add("circle");
 
+    newsLink.href = content[0];
+    newsLink.textContent = content[1];
     advImg.src = "https://image.ibb.co/jmEYL7/adventure_1.jpg";
-    cardTextHead.textContent = content[1];
-    cardTextSource.textContent = "BBC";
+    cardTextHead.appendChild(newsLink);
+    cardTextSource.textContent = "Source : " + src.toUpperCase();
     cardTextDate.textContent = content[2];
     cardTextContent.textContent = content[4];
     popularDestinationsText.textContent = "Advertismenets here!";
@@ -42,9 +46,11 @@ const createCard = (content) => {
     cardFooter.appendChild(popularDestinationsText);
     cardFooter.appendChild(popularDestinationsImage);
 
-    cardText.appendChild(cardTextSource);
-    cardText.appendChild(cardTextHead);
-    cardText.appendChild(cardTextDate);
+    wrapDiv.append(cardTextSource);
+    wrapDiv.appendChild(cardTextHead);
+    wrapDiv.appendChild(cardTextDate);
+
+    cardText.appendChild(wrapDiv);
     cardText.appendChild(cardTextContent);
 
     cardImage.appendChild(img);
@@ -115,11 +121,11 @@ function stackedCards() {
     function onSwipeTop() {
         removeNoTransition();
         transformUi(0, -1000, 0, currentElementObj);
-        console.log(maxElements);
+        // console.log(maxElements);
         if (currentPosition < maxElements - 1) {
             currentPosition = currentPosition + 1;
         }
-        console.log(currentPosition);
+        // console.log(currentPosition);
         updateUi();
         currentElement();
         setActiveHidden("u");
@@ -149,7 +155,6 @@ function stackedCards() {
     function setActiveHidden(loc) {
         if (loc == "u") {
             if (!(currentPosition >= maxElements)) {
-                console.log(currentPosition - 1);
                 listElNodesObj[currentPosition - 1].classList.remove('stackedcards-active');
                 listElNodesObj[currentPosition - 1].classList.add('stackedcards-hidden');
                 listElNodesObj[currentPosition].classList.remove('stackedcards-active');
@@ -318,9 +323,10 @@ var database = firebase.database();
 async function get_data(sources) {
     var articles = [];
     for (var i = 0; i < sources.length; i++) {
-        var snapshot = await firebase.database().ref(sources[i] + "/").once('value')
-        articles.push(snapshot.val());
+        var snapshot = await firebase.database().ref(sources[i] + "/").once('value');
+        articles.push([snapshot.val(),sources[i]]);
     }
+    console.log(articles)
     return articles;
 }
 
@@ -329,13 +335,13 @@ console.log(JSON.parse(window.localStorage.getItem("links")));
 
 var get_result = async function () {
     var result = await get_data(JSON.parse(window.localStorage.getItem("links")))
-
     result.forEach((res) => {
+        const src = res[1];
+        res = res[0];
         res = res.splice(1);
-        console.log(res);
         res.forEach((fin) => {
             // console.log(fin);
-            createCard(fin);
+            createCard(fin,src);
         })
     })
     stackedCards();
@@ -343,3 +349,4 @@ var get_result = async function () {
 
 
 get_result();
+
