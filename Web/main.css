@@ -92,6 +92,18 @@ h3 {
  color: #fff;
 }
 
+.card-text {
+  height: 100%;
+}
+.card-text-head{
+margin: 5px 0px 5px 0px;
+}
+
+.card-text-content{
+margin-bottom: 5px;
+color: rgba(0,0,0,0.8)
+}
+
 .card-content {
  position: relative;
  color: #fff;
@@ -352,17 +364,16 @@ body {
 
 .card-text{
   color: #000;
-  margin: 1em;
+  margin: 1.5em 1.5em 0em 1.5em;
 }
 
 .card-text-head{
   font-size: 2em;
-  margin: 1em;
-  text-align: center;
 }
 
 .card-text-content{
   text-align: justify;
+  font-size: 1.5em;
 }
 
 #stacked-cards-block{
@@ -483,14 +494,21 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
   cursor: pointer;
   display: inline-block;
   background: #aaa;
-  color: #000;
+  color: rgb(255, 255, 255);
   font-size: 1.2em;
-  padding: .5em;
-  border-radius: 1.2em;
+  padding: .2em;
+  width: 90%;
+  text-align: center;
+  border-radius: 1em;
+  box-shadow: 0px 5px 10px rgba(255, 255, 255, 0.4);
+
 }
 
 .subLnk {
-  border-radius: 1.2em;
+  margin-top: 1em;
+  border-radius: 1em;
+  width: 90%;
+  height: 20px;
 }
 /* ======================= */
 .link {

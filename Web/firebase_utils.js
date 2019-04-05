@@ -6,7 +6,9 @@ const createCard = (content) => {
     const cardImage = document.createElement("div");
     const img = new Image();
     const cardText = document.createElement("div");
+    const cardTextSource = document.createElement("div");
     const cardTextHead = document.createElement("div");
+    const cardTextDate = document.createElement("div");
     const cardTextContent = document.createElement("div");
     const cardFooter = document.createElement("div");
     const popularDestinationsText = document.createElement("div");
@@ -18,7 +20,9 @@ const createCard = (content) => {
     cardContent.classList.add("card-content");
     cardImage.classList.add("card-image");
     cardText.classList.add("card-text");
+    cardTextSource.classList.add("card-text-content");
     cardTextHead.classList.add("card-text-head");
+    cardTextDate.classList.add("card-text-content");
     cardTextContent.classList.add("card-text-content");
     cardFooter.classList.add("card-footer");
     popularDestinationsText.classList.add("popular-destinations-text");
@@ -27,6 +31,8 @@ const createCard = (content) => {
 
     advImg.src = "https://image.ibb.co/jmEYL7/adventure_1.jpg";
     cardTextHead.textContent = content[1];
+    cardTextSource.textContent = "BBC";
+    cardTextDate.textContent = content[2];
     cardTextContent.textContent = content[4];
     popularDestinationsText.textContent = "Advertismenets here!";
     img.src = content[3];
@@ -36,7 +42,9 @@ const createCard = (content) => {
     cardFooter.appendChild(popularDestinationsText);
     cardFooter.appendChild(popularDestinationsImage);
 
+    cardText.appendChild(cardTextSource);
     cardText.appendChild(cardTextHead);
+    cardText.appendChild(cardTextDate);
     cardText.appendChild(cardTextContent);
 
     cardImage.appendChild(img);
